@@ -10,7 +10,7 @@ export const authenticateUser = (username, password) =>{
 
     return async dispatch =>{
         dispatch(loginRequest());
-       await axios.post("http://localhost:8082/api/auth/signin", information)
+       await axios.post("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/auth/signin", information)
         .then(res =>{
             let token = res.data.accessToken;
             localStorage.setItem("jwtToken", token);
@@ -29,7 +29,7 @@ export const updatePassword = (password, token) =>{
     }
     return dispatch =>{
         dispatch(update());
-        axios.post("http://localhost:8082/api/auth/password-reset", up)
+        axios.post("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/auth/password-reset", up)
         .then(res =>{
             dispatch(success(true));
         })
@@ -45,7 +45,7 @@ export const setMail = (email) =>{
     }
     return dispatch =>{
         dispatch(sendMail());
-        axios.post("http://localhost:8082/api/auth/password-reset-request", em)
+        axios.post("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/auth/password-reset-request", em)
         .then(res => {
             dispatch(success(true))
         })

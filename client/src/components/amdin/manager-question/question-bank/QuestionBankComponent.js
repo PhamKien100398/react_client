@@ -32,12 +32,21 @@ class QuestionBankComponent extends React.Component{
     }
 
     select = async (event) => {
-        console.log(event);
         await PartService.getPartListByCourseId(event.target.value)
         .then(res =>{
             this.setState({
                 selected: true,
                 listPartByCourse: res.data
+            })
+        })
+    }
+
+    selectPart = async (event) =>{
+        await QuestionService.getListQuestionByPart(event.target.value)
+        .then(res =>{
+            this.setState({
+                selected: true,
+                listQuestion: res.data.data
             })
         })
     }
@@ -120,7 +129,7 @@ class QuestionBankComponent extends React.Component{
                                         >
                                             Nội dung
                                         </label>
-                                        <select
+                                        <select onChange={this.selectPart}
                                                 name="part"
                                                 class="block appearance-none w-full bg-gray-200 py-2 px-3 my-1 mt-3 pr-4 rounded shadow leading-tight focus:outline-none">
                                             <option value="0">-- Nội dung môn học --</option>
@@ -176,7 +185,7 @@ class QuestionBankComponent extends React.Component{
                                         return (
                                             <tr class="border hover:bg-gray-300">
 
-                                    <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4 text-left">
+                                    <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4 text-left">
                                         <div class="cursor-pointer hover:text-blue-800 text-md">{item.questionText}</div>
                                     </th>
                                     <td class="border-t-0 text-center px-6 align-middle  border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 w-1/3">

@@ -4,7 +4,7 @@ class examService {
     getExam(){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return axios.get("http://localhost:8082/api/exams/list-all-by-user", {
+        return axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exams/list-all-by-user", {
             headers : {
                 'Authorization': AuthStr 
             }
@@ -14,7 +14,7 @@ class examService {
     getExamDetailById(id){
         const token = localStorage.getItem("jwtToken")
         const AuthStr = 'Bearer ' + token;
-        return axios.get("http://localhost:8082/api/exams/exam-user/"+id, {
+        return axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exams/exam-user/"+id, {
             headers : {
                 'Authorization': AuthStr 
             }
@@ -28,7 +28,7 @@ class examService {
         }
         const token = localStorage.getItem("jwtToken")
         const AuthStr = 'Bearer ' + token;
-        return await axios.put("http://localhost:8082/api/exams/"+examId+"/questions-by-user", listQuestion,
+        return await axios.put("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exams/"+examId+"/questions-by-user", listQuestion,
         {
             params:{
                 isFinish: isFinish,

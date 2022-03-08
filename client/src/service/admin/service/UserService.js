@@ -66,7 +66,7 @@ class UserService {
     async deleteUser(id, deleted){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/users/"+id+"/deleted/"+deleted,
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users/"+id+"/deleted/"+deleted,
         {
             headers : {
                 'Authorization': AuthStr 
@@ -77,7 +77,7 @@ class UserService {
     async changeDeletedUser(id, deleted){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/users/"+id+"/deleted/"+deleted,
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users/"+id+"/deleted/"+deleted,
         {
             headers : {
                 'Authorization': AuthStr 
@@ -88,7 +88,7 @@ class UserService {
     async checkUsername(username){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/users/check-username", {
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users/check-username", {
             params:{
                 value: username
             },    
@@ -101,7 +101,7 @@ class UserService {
     async createUser(user){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.post("http://localhost:8082/api/users", user, {
+        return await axios.post("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users", user, {
             headers : {
                 'Authorization': AuthStr 
             }

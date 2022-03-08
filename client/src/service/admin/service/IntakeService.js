@@ -4,7 +4,7 @@ class IntakeService {
     async getIntakeList(){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/intakes", {
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/intakes", {
             headers : {
                 'Authorization': AuthStr 
             }

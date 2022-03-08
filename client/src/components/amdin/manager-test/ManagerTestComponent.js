@@ -141,7 +141,9 @@ class ManageTestComponent extends React.Component{
                                             <tr class="border hover:bg-gray-300">
                                                 <td
                                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md font-semibold text-gray-800 whitespace-no-wrap p-4">
-                                                <a class="hover:text-blue-700"><span class="mx-2 text-gray-600 text-sm">(Đã huỷ)</span>{item.title}</a>
+                                                <Link to={"/admin/test/detail-test/"+item.id} class="hover:text-blue-700">
+                                                    {item.beginExam.canceled && <span class="mx-2 text-gray-600 text-sm">(Đã huỷ)</span>}
+                                                    {item.title}</Link>
                                                 </td>
                                                 <td
                                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-no-wrap p-4 text-left">{item.beginExam}

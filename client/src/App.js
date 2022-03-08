@@ -15,6 +15,7 @@ import ProfileComponent from './components/users/profile/ProfileComponent';
 import QuestionBankComponent from './components/amdin/manager-question/question-bank/QuestionBankComponent'
 import ManagerTestComponent from './components/amdin/manager-test/ManagerTestComponent'
 import AddTestComponent from './components/amdin/manager-test/add-test/AddTestComponent';
+import DetailTestComponent from './components/amdin/manager-test/detail-test/DetailTestComponent';
 
 function App() {
   return (
@@ -56,6 +57,10 @@ function App() {
           }}/>
           <Route exact path = "/admin/test/add-test" render = {() =>{
               return localStorage.getItem("jwtToken") ? <AddTestComponent/> : <Redirect to = "/login"/>
+          }}/>
+
+          <Route exact path = "/admin/test/detail-test/:id" render = {(props) =>{
+              return localStorage.getItem("jwtToken") ? <DetailTestComponent {...props}/> : <Redirect to = "/login"/>
           }}/>
           
 

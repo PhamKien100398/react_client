@@ -7,7 +7,7 @@ export const getUsers = ()=>{
         const token = localStorage.getItem("jwtToken")
         const AuthStr = 'Bearer ' + token;
         dispatch(request_users());
-        await axios.get("http://localhost:8082/api/users", {
+        await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users", {
             headers : {
                 'Authorization': AuthStr 
             }

@@ -4,7 +4,7 @@ class PartService {
     async getPartListByCourseId(courseId){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/courses/"+courseId+"/part-list", {
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/courses/"+courseId+"/part-list", {
             headers : {
                 'Authorization': AuthStr 
             }
