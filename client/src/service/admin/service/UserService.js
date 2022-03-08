@@ -5,7 +5,7 @@ class UserService {
         if(id === null){
             const token = localStorage.getItem("jwtToken");
             const AuthStr = 'Bearer ' + token;
-            return await axios.get("http://localhost:8082/api/users/check-email", {
+            return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users/check-email", {
                 params:{
                     value: email
                 },    
@@ -16,7 +16,7 @@ class UserService {
         }else{
             const token = localStorage.getItem("jwtToken");
             const AuthStr = 'Bearer ' + token;
-            return await axios.get("http://localhost:8082/api/users/"+id+"/check-email", {
+            return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users/"+id+"/check-email", {
                 params:{
                     value: email
                 },    
@@ -30,7 +30,7 @@ class UserService {
     async getUsers(){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/users", {
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users", {
             headers : {
                 'Authorization': AuthStr 
             }
@@ -40,7 +40,7 @@ class UserService {
     async searchUser(value, page, size){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/users/search", {
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users/search", {
             params:{
                 'search-keyword': value,
                 'page': page,
@@ -55,7 +55,7 @@ class UserService {
     async updateUser(user, id){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.put("http://localhost:8082/api/users/"+id, user,
+        return await axios.put("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/users/"+id, user,
         {
             headers : {
                 'Authorization': AuthStr 
