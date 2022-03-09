@@ -77,7 +77,7 @@ class NavSideBarComponent extends React.Component{
                             class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"><FontAwesomeIcon icon = {faQuestionCircle} className = "opacity-75 mr-2 text-sm"/>Ngân hàng câu hỏi</Link>
                         </li>
                         <li class="items-center">
-                        <Link
+                        <Link to ={"/admin/cource"}
                             routerLinkActive="text-blue-500 hover:text-blue-600"
                             class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"><FontAwesomeIcon icon = {faBook} className = "opacity-75 mr-2 text-sm"/>
                             Quản trị môn học</Link>

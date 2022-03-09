@@ -331,10 +331,10 @@ class UpdateUserComponent extends React.Component{
                             onClick={this.handingUpdate}
                         ><span><i class="fa fa-refresh mr-1"></i>Cập nhật</span>
                         </Link>}
-                        <button
+                        <Link to ="/admin/users"
                             class="shadow-md bg-gray-600 text-gray-100 hover:bg-gray-700 hover:text-gray-200 transition duration-200 ease-in-out text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                             type="button" onClick={this.close}><span><i class="fa fa-window-close mr-1"></i>Đóng</span>
-                        </button>
+                        </Link>
 
 
                         </div>

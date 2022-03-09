@@ -16,6 +16,7 @@ import QuestionBankComponent from './components/amdin/manager-question/question-
 import ManagerTestComponent from './components/amdin/manager-test/ManagerTestComponent'
 import AddTestComponent from './components/amdin/manager-test/add-test/AddTestComponent';
 import DetailTestComponent from './components/amdin/manager-test/detail-test/DetailTestComponent';
+import ManageCourceComponent from './components/amdin/manager-cource/ManageCourceComponent';
 
 function App() {
   return (
@@ -63,6 +64,9 @@ function App() {
               return localStorage.getItem("jwtToken") ? <DetailTestComponent {...props}/> : <Redirect to = "/login"/>
           }}/>
           
+          <Route exact path = "/admin/cource" render = {(props) =>{
+              return localStorage.getItem("jwtToken") ? <ManageCourceComponent/> : <Redirect to = "/login"/>
+          }}/>
 
           {/* meeting */}
           <AppContainer>

@@ -5,6 +5,7 @@ import QuestionService from "../../../../service/admin/service/QuestionService";
 import QuestionTypeService from "../../../../service/admin/service/QuestionTypeService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 class AddQuestionComponent extends React.Component{
     constructor(props){
@@ -27,6 +28,12 @@ class AddQuestionComponent extends React.Component{
             typeCode: '',
             count: 0
         }
+    }
+
+    close = () =>{
+        this.setState({
+            view: !this.state.view
+        })
     }
 
     async componentWillReceiveProps(nextProps){
@@ -145,15 +152,6 @@ class AddQuestionComponent extends React.Component{
             typeCode: value
 
         })
-    }
-
-    close = () =>{
-        // this.setState({
-        //     view: !this.state.view,
-        //     listQuestion: [],
-        //     listCourse: []
-        // })
-        window.location.reload();
     }
 
     render(){
@@ -382,11 +380,11 @@ class AddQuestionComponent extends React.Component{
                                     type="submit"
                                     onClick = {this.create}><span><i class="fa fa-question-circle mr-1"></i>Tạo câu hỏi</span>
                                 </button>
-                                <button
+                                <Link to="/admin/question"
                                     class="shadow-md bg-gray-600 text-gray-100 hover:bg-gray-700 hover:text-gray-200 transition duration-200 ease-in-out text-xs font-bold uppercase px-3 py-2 rounded outline-none focus:outline-none mr-1 mb-1"
-                                    type="button" onClick={this.close}
-                                ><span><i class="fa fa-window-close mr-1"></i>Đóng</span>
-                                </button>
+                                    type="button"
+                                ><span><i class="fa fa-window-close mr-1" onClick={this.close}></i>Đóng</span>
+                                </Link>
 
                                 </div>
 

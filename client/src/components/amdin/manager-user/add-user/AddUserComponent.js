@@ -25,17 +25,12 @@ class AddUserComponent extends React.Component{
             tab2: "text-blue-600 bg-white",
             moveTab1: "block",
             moveTab2: "none",
-            addUser: {},
             notify: false,
             listUser: 0
         }
     }
 
     close = () =>{
-        // this.setState({
-        //     view: !this.state.view,
-        //     regexEmail: false
-        // })
         window.location.reload();
     }
 
@@ -109,41 +104,20 @@ class AddUserComponent extends React.Component{
             this.setState({
                 email: value,
                 checkEmail: true,
-                regexEmail: false,
-                existEmail: false
+                regexEmail: false
             })
         }else if(checkingResult === null){
             this.setState({
                 regexEmail: true,
                 email: value,
-                checkEmail: true,
-                existEmail: false
-            })
-        }else{
-            let data = false;
-            await UserService.checkEmail(value, null)
-            .then(res =>{
-                data = res.data
-            }).catch(error =>{
-                console.log(error);
-            })
-
-        console.log(data);
-        if(data){
-            this.setState({
-                regexEmail: false,
-                email: value,
-                checkEmail: true,
-                existEmail: true
+                checkEmail: true
             })
         }else{
             this.setState({
-                regexEmail: false,
                 email: value,
                 checkEmail: false,
-                existEmail: false
+                regexEmail: false
             })
-        }
         }
     }
 
@@ -158,16 +132,14 @@ class AddUserComponent extends React.Component{
         }
 
         await UserService.createUser(data).then(res =>{
-            toast.success("Thêm dữ liệu thành công!!!");
+            toast.success(res.data.message);
             this.setState({
-                addUser: res.data,
                 notify: true,
                 listUser: this.state.listUser + 1
             })
         }).catch(error =>{
             toast.error("Thêm dữ liệu thất bại!!!");
             this.setState({
-                addUser: [],
                 notify: false
             })
         })
@@ -179,32 +151,17 @@ class AddUserComponent extends React.Component{
             this.setState({
                 username: value,
                 checkUser: true,
-                existUsername: false
             })
-        }else if(e.target.value.length < 6){
+        }else if(value.length < 6){
             this.setState({
                 username: value,
                 checkUser: true,
-                existUsername: false
             })
         }else{
-            let data = false;
-            await UserService.checkUsername(value).then(res =>{
-                data = res.data;
+            this.setState({
+                username: e.target.value,
+                checkUser: false
             })
-            if(data){
-                this.setState({
-                    username: value,
-                    checkUser: true,
-                    existUsername: true
-                })
-            }else{
-                this.setState({
-                    username: value,
-                    checkUser: false,
-                    existUsername: false
-                })
-            }
         }
     }
 
@@ -275,8 +232,6 @@ class AddUserComponent extends React.Component{
                                             {this.state.checkUser && this.state.username.length > 0 && this.state.username.length < 6
                                             && <p class="text-red-500 text-xs italic">
                                             Username phải có ít nhất 6 kí tự</p>}
-                                            {this.state.checkUser && this.state.existUsername && <p class="text-red-500 text-xs italic">
-                                            Username đã tồn tại</p>}
                                         </div>
                                         </div>
                                         <div class="-mx-3 md:flex mb-2 w-full">
@@ -290,6 +245,7 @@ class AddUserComponent extends React.Component{
                                             id="frm-add-last-name" type="text" placeholder="Họ, tên đệm"
                                             autocomplete="off"
                                             name="lastName"
+                                            value={this.state.lastName}
                                             onChange={this.checkLastName}
                                             formControlName="lastName"
                                             required 
@@ -340,8 +296,6 @@ class AddUserComponent extends React.Component{
                                                 >Email không được bỏ trống</p>}
                                                 {this.state.regexEmail && this.state.checkEmail && this.state.email !== "" && <p class="text-red-500 text-xs italic"
                                                 >Email không hợp lệ</p>}
-                                                {this.state.checkEmail && !this.state.regexEmail && this.state.email !== "" && this.state.existEmail && <p class="text-red-500 text-xs italic">
-                                                Email đang thuộc tài khoản khác</p>}
                                                     </div>
                                         </div>
                                     </div>
@@ -354,10 +308,10 @@ class AddUserComponent extends React.Component{
                                         onClick={this.handingAdd}
                                     ><span><i class="fa fa-refresh mr-1"></i>Cập nhật</span>
                                     </Link>}
-                                    <button
+                                    <Link to="/admin/users"
                                         class="shadow-md bg-gray-600 text-gray-100 hover:bg-gray-700 hover:text-gray-200 transition duration-200 ease-in-out text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
-                                        type="button" onClick={this.close}><span><i class="fa fa-window-close mr-1"></i>Đóng</span>
-                                    </button>
+                                        type="button" onClick = {this.close}><span><i class="fa fa-window-close mr-1"></i>Đóng</span>
+                                    </Link>
 
 
                                     </div>
