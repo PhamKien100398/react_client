@@ -152,7 +152,8 @@ class ManageTestComponent extends React.Component{
                                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                                                     {moment(moment(item.beginExam).format('YYYY-MM-DD HH:mm:ss')).isAfter(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')) && <span class="text-gray-700 bg-gray-200 rounded px-2 py-1">Chưa bắt đầu</span>}
                                                     
-                                                    {moment(moment(item.beginExam).format('YYYY-MM-DD HH:mm:ss')).isBefore(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')) && <span class="text-red-700 bg-red-200 rounded px-2 py-1">Kết thúc</span>}
+                                                    {moment(moment(item.finishExam).format('YYYY-MM-DD HH:mm:ss')).isBefore(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')) && <span class="text-red-700 bg-red-200 rounded px-2 py-1">Kết thúc</span>}
+                                                    {moment(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')).isBetween(moment(item.beginExam).format('YYYY-MM-DD HH:mm:ss'), moment(item.finishExam).format('YYYY-MM-DD HH:mm:ss')) && <span class="text-red-700 bg-red-200 rounded px-2 py-1">Đang diễn ra</span>}
                                                     {item.beginExam.canceled && <span class="text-red-900 bg-red-400 rounded px-2 py-1">Đã huỷ</span>}
                                                 </td>
                                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">

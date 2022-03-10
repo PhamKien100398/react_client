@@ -4,7 +4,7 @@ class ExamService {
     async getExamList(){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.get("http://localhost:8082/api/exams", {
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exams", {
             headers : {
                 'Authorization': AuthStr 
             }
@@ -14,7 +14,7 @@ class ExamService {
     async createExam(exam, intakeId, partId, locked){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.post("http://localhost:8082/api/exams", exam, 
+        return await axios.post("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exams", exam, 
         {
             params:{
                 'intakeId': intakeId,

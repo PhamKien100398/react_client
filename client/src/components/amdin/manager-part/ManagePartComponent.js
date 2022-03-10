@@ -1,4 +1,5 @@
 import React from "react";
+import CourseService from "../../../service/admin/service/CourseService";
 import PartService from "../../../service/admin/service/PartService";
 import NavSideBarComponent from "../nav-sidebar/NavSideBarComponent";
 import NavbarComponent from "../navbar/NavbarComponent";
@@ -11,15 +12,19 @@ class ManagePartComponent extends React.Component{
         super(props);
         this.state = {
             createPart: false,
-            listPart: []
+            listPart: [],
+            course: {}
         }
     }
 
     async componentDidMount(){
-        await PartService.getPartListByCourseId(this.props.match.params.id).then(res =>{
-            this.setState({
-                createCourse: false,
-                listPart: res.data
+        await PartService.getPartListByCourseId(this.props.match.params.id).then(async res =>{
+            await CourseService.getCourse(this.props.match.params.id).then(r =>{
+                this.setState({
+                    createCourse: false,
+                    listPart: res.data,
+                    course: r.data
+                })
             })
         })
     }
@@ -51,7 +56,7 @@ class ManagePartComponent extends React.Component{
                                       <div class="flex flex-wrap items-center">
                                       <div class="relative w-full px-4 max-w-full flex-grow leading-8 mb-3">
                                       <h3 class="font-semibold text-2xl text-gray-800">
-                                          Danh sách môn học
+                                          {this.state.course.name+" - "+ this.state.course.courseCode}
                                       </h3>
                                       </div>
                                       <div class="flex flex-wrap flex-col w-full">
@@ -145,9 +150,8 @@ class ManagePartComponent extends React.Component{
                                               </button>  
                                             </div>  
                                           </div>  
-                                            <div class="px-4 py-3 bg-white border-t flex flex-row justify-between xs:flex-row items-center xs:justify-between">  
-                                              <p class="mx-auto text-gray-700 text-sm">Nội dung không có để hiển thị</p>  
-                                            </div>  
+                                            {this.state.listPart.length === 0 && <div class="px-4 py-3 bg-white border-t flex flex-row justify-between xs:flex-row items-center xs:justify-between">  
+                                              <p class="mx-auto text-gray-700 text-sm">Nội dung không có để hiển thị</p></div>}    
 
                             </div>
                             </div>

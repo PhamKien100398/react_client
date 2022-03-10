@@ -31,9 +31,7 @@ class AddQuestionComponent extends React.Component{
     }
 
     close = () =>{
-        this.setState({
-            view: !this.state.view
-        })
+        window.location.reload();
     }
 
     async componentWillReceiveProps(nextProps){
@@ -82,7 +80,8 @@ class AddQuestionComponent extends React.Component{
         })
     }
 
-    create = async () =>{
+    create = async (e) =>{
+        e.preventDefault();
         const question = {
             'questionText': this.state.questionText,
             'point': this.state.point,
@@ -380,11 +379,11 @@ class AddQuestionComponent extends React.Component{
                                     type="submit"
                                     onClick = {this.create}><span><i class="fa fa-question-circle mr-1"></i>Tạo câu hỏi</span>
                                 </button>
-                                <Link to="/admin/question"
+                                <button
                                     class="shadow-md bg-gray-600 text-gray-100 hover:bg-gray-700 hover:text-gray-200 transition duration-200 ease-in-out text-xs font-bold uppercase px-3 py-2 rounded outline-none focus:outline-none mr-1 mb-1"
-                                    type="button"
-                                ><span><i class="fa fa-window-close mr-1" onClick={this.close}></i>Đóng</span>
-                                </Link>
+                                    type="button" onClick={this.close}
+                                ><span><i class="fa fa-window-close mr-1"></i>Đóng</span>
+                                </button>
 
                                 </div>
 

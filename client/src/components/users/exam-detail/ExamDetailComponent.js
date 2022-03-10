@@ -10,7 +10,9 @@ import examService from '../../../service/user/exam/examService'
 import socket from '../../../socket';
 import Header from "../header/Header";
 import {connect} from 'react-redux'
-import {getExamQuestion, getExamResult} from '../../../service/index'
+import {getExamQuestion, getExamResult} from '../../../service/index';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class ExamDetailComponent extends React.Component{
     constructor(props){
@@ -29,10 +31,14 @@ class ExamDetailComponent extends React.Component{
     start = async e =>{
         e.preventDefault();
         await this.props.getExamQuestion(this.props.match.params.id);
-        setTimeout(()=>{
-            console.log(this.props.question);
-            this.props.history.push(`/user/exam_detail/${this.props.match.params.id}/start`);
-        }, 500)
+        if(this.props.question.question != undefined){
+            setTimeout(()=>{
+                console.log(this.props.question);
+                this.props.history.push(`/user/exam_detail/${this.props.match.params.id}/start`);
+            }, 500)
+        }else{
+            toast.success("Bài thi đang bị khoá hoặc chưa tới thời gian phù hợp")
+        }
     }
 
     clickJoin = () =>{
@@ -83,6 +89,7 @@ class ExamDetailComponent extends React.Component{
         console.log(this.state.user);
         return (
             <div class="font-sans antialiased h-screen bg-gray-100 w-full flex flex-row">
+            <ToastContainer/>
             <LeftSideComponent/>
                     <div class="w-full bg-gray-100 py-0 overflow-hidden overflow-y-scroll" style = {{position : "relative"}}>
                         <Header/>

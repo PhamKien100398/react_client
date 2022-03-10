@@ -7,7 +7,7 @@ export const getExamQuestion = (id)=>{
         const token = localStorage.getItem("jwtToken")
         const AuthStr = 'Bearer ' + token;
         dispatch(request_exam_question());
-        await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exams/"+id+"/questions", {
+        await axios.get("http://localhost:8082/api/exams/"+id+"/questions", {
             headers : {
                 'Authorization': AuthStr 
             }

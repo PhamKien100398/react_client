@@ -243,10 +243,9 @@ class QuestionBankComponent extends React.Component{
                             </div>
                             </div>
                             {/* <ng-container *ngIf="questionList.length==0 && skeleton==false"> */}
-                            <div
+                            {this.state.listQuestion.length === 0 && <div
                                 class="px-4 py-3 bg-white border-t flex flex-row justify-between xs:flex-row items-center xs:justify-between">
-                                <p class="mx-auto text-gray-700 text-sm">Nội dung không có để hiển thị</p>
-                            </div>
+                                <p class="mx-auto text-gray-700 text-sm">Nội dung không có để hiển thị</p></div>}
                             {/* </ng-container> */}
                         </div>
                         </div>

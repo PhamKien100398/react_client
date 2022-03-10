@@ -14,12 +14,23 @@ class CourseService {
     async createCourse(data){
         const token = localStorage.getItem("jwtToken");
         const AuthStr = 'Bearer ' + token;
-        return await axios.post("http://localhost:8082/api/courses", data, {
+        return await axios.post("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/courses", data, {
             headers : {
                 'Authorization': AuthStr 
             }
         })
     }
+
+    async getCourse(id){
+        const token = localStorage.getItem("jwtToken");
+        const AuthStr = 'Bearer ' + token;
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/courses/"+id,{
+            headers : {
+                'Authorization': AuthStr 
+            }
+        })
+    }
+
 
     
 

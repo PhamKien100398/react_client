@@ -1,7 +1,7 @@
 import * as QT from './questionType'
 
 const initState = {
-    question: ""
+    question: {}
 }
 
 const reducer = (state = initState, action_question) =>{
@@ -18,7 +18,7 @@ const reducer = (state = initState, action_question) =>{
             
         case QT.FALSE_QUESTION:
             return {
-                question: []
+                question: undefined
             };
         default:
             return {
