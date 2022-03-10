@@ -27,17 +27,7 @@ class UpdateUserComponent extends React.Component{
     }
 
     close = () =>{
-        this.setState({
-            view: !this.props.click,
-            regexEmail: false,
-            checkLast: false,
-            existEmail: false,
-            id: "",
-            username: "",
-            lastName: "",
-            firstName: "",
-            email: "",
-        })
+        window.location.reload();
     }
 
     async componentDidMount(){
@@ -54,22 +44,22 @@ class UpdateUserComponent extends React.Component{
         })
     }
 
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps.data);
-        if(nextProps.click){
-            this.setState({
-                view: this.props.click,
-                id: nextProps.data.id,
-                username: nextProps.data.username,
-                lastName: nextProps.data.profile.lastName,
-                firstName: nextProps.data.profile.firstName,
-                email: nextProps.data.email,
-                existEmail: false,
-                checkLast: false,
-                regexEmail: false,
-            })
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     console.log(nextProps.data);
+    //     if(nextProps.click){
+    //         this.setState({
+    //             view: this.props.click,
+    //             id: nextProps.data.id,
+    //             username: nextProps.data.username,
+    //             lastName: nextProps.data.profile.lastName,
+    //             firstName: nextProps.data.profile.firstName,
+    //             email: nextProps.data.email,
+    //             existEmail: false,
+    //             checkLast: false,
+    //             regexEmail: false,
+    //         })
+    //     }
+    // }
 
     checkLastName = (e) =>{
         if(e.target.value === ""){
@@ -165,9 +155,6 @@ class UpdateUserComponent extends React.Component{
                 }
             })
         })
-        window.location.reload();
-        // await this.props.getUsers();
-        // this.props.history.push("/admin/users");
     }
 
     render(){

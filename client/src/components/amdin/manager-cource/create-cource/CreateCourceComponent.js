@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CourseService from "../../../../service/admin/service/CourseService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FileService from "../../../../service/admin/service/FileService";
 
 class CreateCourceComponent extends React.Component{
 
@@ -29,6 +30,32 @@ class CreateCourceComponent extends React.Component{
 
     create = async (e) =>{
         e.preventDefault();
+        // const formData = new FormData();
+        // formData.append('file', this.state.file);
+        
+        // await FileService.updoadFile(formData).then( async r =>{
+        //     const data = {
+        //         'courseCode': this.state.courseCode,
+        //         'name': this.state.courseName,
+        //         'imgUrl': r.data
+        //     }
+
+        //     await CourseService.createCourse(data).then(res =>{
+        //         toast.success("Thêm dữ liệu thành công!!!");
+        //         this.setState({
+        //             count: this.state.count + 1
+        //         })
+        //     }).catch(err =>{
+        //         toast.error("Thêm dữ liệu thất bại!!!");
+        //         this.setState({
+        //             count: this.state.count
+        //         })
+        //     })
+
+        // }).catch(error =>{
+        //     toast.error("upload ảnh thất bại!!!");
+        // })
+
         const data = {
             'courseCode': this.state.courseCode,
             'name': this.state.courseName,
@@ -180,9 +207,9 @@ class CreateCourceComponent extends React.Component{
 
 
                                 </div>
+                                {this.state.count !== 0 && <div class="font-semibold text-xl px-8">Danh sách môn học thêm thành công: {this.state.count}</div>}
                             </div>
                             </div>
-                            {this.state.count !== 0 && <div class="font-semibold text-xl">Danh sách người dùng thêm thành công: {this.state.count}</div>}
 
                         </div>
                     </form>
