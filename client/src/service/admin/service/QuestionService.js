@@ -36,6 +36,16 @@ class QuestionService {
         })
     }
 
+    async getListQuestionByExamId(id){
+        const token = localStorage.getItem("jwtToken");
+        const AuthStr = 'Bearer ' + token;
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exam/"+id+"/question-text", {
+            headers : {
+                'Authorization': AuthStr
+            }
+        })
+    }
+
 }
 
 export default new QuestionService();

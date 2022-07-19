@@ -5,6 +5,7 @@ import NavSideBarComponent from "../../nav-sidebar/NavSideBarComponent";
 import NavbarComponent from "../../navbar/NavbarComponent";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import QuestionService from "../../../../service/admin/service/QuestionService";
 
 class DetailTestComponent extends React.Component{
 
@@ -12,13 +13,33 @@ class DetailTestComponent extends React.Component{
         super(props);
         this.state = {
             cancel: false,
-            okeCancel: false
+            okeCancel: false,
+            exam: {},
+            intake: {},
+            course: {},
+            part: {},
+            listQuestion: []
         }
     }
 
     cancelTest = () =>{
         this.setState({
             cancel: !this.state.cancel
+        })
+    }
+
+    async componentDidMount(){
+        await ExamService.getExam(this.props.match.params.id).then(async res =>{
+            await QuestionService.getListQuestionByExamId(this.props.match.params.id).then(r =>{
+                this.setState({
+                    exam: res.data,
+                    intake: res.data.intake,
+                    course: res.data.part.course,
+                    part: res.data.part,
+                    listQuestion: r.data
+    
+                })
+            })
         })
     }
 
@@ -48,9 +69,11 @@ class DetailTestComponent extends React.Component{
     }
 
     render() {
+        console.log(this.state.listQuestion);
         return (
             <div>
                 <ToastContainer/>
+                
                 <NavSideBarComponent/>
                 <div class="relative md:ml-64 bg-gray-200">
                     <NavbarComponent/>
@@ -89,11 +112,11 @@ class DetailTestComponent extends React.Component{
                                         <div class="md:w-full px-3">
                                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2"
                                             >
-                                            Khoá thực tập
+                                            Tên lớp
                                             </label>
                                             <select name="intake"
                                                     class="block appearance-none w-full bg-gray-200 py-2 px-3 my-1 mt-3 pr-4 rounded shadow leading-tight focus:outline-none">
-                                            <option >ABC</option>
+                                            <option >{this.state.intake.name}</option>
 
                                             </select>
                                         </div>
@@ -112,7 +135,7 @@ class DetailTestComponent extends React.Component{
                                             Tiêu đề
                                             </label>
 
-                                            <div><span class="px-2 py-1 bg-blue-200 text-blue-700 rounded">ABC</span></div>
+                                            <div><span class="px-2 py-1 bg-blue-200 text-blue-700 rounded">{this.state.exam.title}</span></div>
                                         </div>
                                         </div>
 
@@ -127,7 +150,7 @@ class DetailTestComponent extends React.Component{
                                             name="course"
                                             class="block appearance-none w-full bg-gray-200 py-2 px-3 my-1 mt-3 pr-4 rounded shadow leading-tight focus:outline-none">
                                             <option 
-                                            >ABC</option>
+                                            >{this.state.course.name}</option>
 
                                             </select>
 
@@ -140,7 +163,7 @@ class DetailTestComponent extends React.Component{
                                             <select
                                             name="part"
                                             class="block appearance-none w-full bg-gray-200 py-2 px-3 my-1 mt-3 pr-4 rounded shadow leading-tight focus:outline-none">
-                                            <option >ABC</option>
+                                            <option >{this.state.part.name}</option>
 
                                             </select>
 
@@ -159,7 +182,7 @@ class DetailTestComponent extends React.Component{
                                             >
                                             Thời gian mở
                                             </label>
-                                            <div>ABC</div>
+                                            <div>{this.state.exam.beginExam}</div>
                                         </div>
 
                                         <div class="md:w-1/3 px-3">
@@ -167,33 +190,15 @@ class DetailTestComponent extends React.Component{
                                             >
                                             Thời gian đóng
                                             </label>
-                                            <div>ABC</div>
+                                            <div>{this.state.exam.finishExam}</div>
                                         </div>
                                         <div class="md:w-1/3 px-3">
                                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2"
                                             >
                                             Thời gian làm bài (phút)
                                             </label>
-                                            <div>ABC</div>
+                                            <div>{this.state.exam.durationExam}</div>
                                         </div>
-                                        </div>
-                                    </div>
-                                    <hr class="border w-full my-3"/>
-                                    <div class="relative w-full px-4 max-w-full flex-flow flex-basis">
-                                        <p class="mx-3 my-3 text-gray-600 text-md text-blue-700 text-xl font-semibold">Thiết lập khác</p>
-                                        <div class="-mx-3 md:flex mb-2 w-full">
-                                        <div class="w-64 px-3">
-                                            <div class="radio-type flex-1">
-                                            <div class="radio-btn">
-                                                <input type="checkbox" id="shuffle"
-                                                    name="shuffle"
-                                                />
-
-                                                <label for="shuffle">Trộn câu hỏi</label>
-                                            </div>
-                                            </div>
-                                        </div>
-
                                         </div>
                                     </div>
                                     </div>
@@ -212,44 +217,50 @@ class DetailTestComponent extends React.Component{
                                     <div class="flex justify-between my-4 px-2 text-gray-800 font-bold">
                                     <div>
                                         <span class="mx-1">Số câu đã chọn:</span>
-                                        <span class="mx-1 text-blue-700">ABC</span>
+                                        <span class="mx-1 text-blue-700">{this.state.listQuestion.length}</span>
                                     </div>
                                     </div>
                                     <div class="example-list">
-                                    <div class="example-box">
-                                        <div class="w-full hover:bg-gray-300 flex flex-row items-center">
-                                        <div class="px-4 w-20">
-                                            <span class="text-gray-600 italic font-semibold text-lg">ABC</span>
-                                        </div>
-                                        <div
-                                            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4 text-left md:w-3/5">
-                                            <div></div>
-                                        </div>
+                                        {this.state.listQuestion.map((item, index) =>{
+                                            return (
+                                                <div class="example-box">
+                                                    <div class="w-full hover:bg-gray-300 flex flex-row items-center">
+                                                    <div class="px-4 w-20">
+                                                        <span class="text-gray-600 italic font-semibold text-lg">{index + 1}</span>
+                                                    </div>
+                                                    <div
+                                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4 text-left md:w-3/5">
+                                                        <div>{item.questionText}</div>
+                                                    </div>
 
-                                        <div
-                                            class="border-t-0 md:w-1/6 px-6 align-middle border-l-0 border-r-0 text-xs  p-4">
-                                                    <span
-                                                        class="px-2 py-1 bg-green-200 cursor-pointer font-medium hover:bg-green-300 transition duration-300 ease-in-out font-light text-green-600 text-xs rounded-md">ABC</span>
-                                           
-                                                    <span
-                                                        class="px-2 py-1 bg-gray-200 cursor-pointer font-medium hover:bg-gray-400 transition duration-300 ease-in-out font-light text-gray-600 text-xs rounded-md">ANC</span>
-                                            
-                                                    <span
-                                                        class="px-2 py-1 bg-red-200 cursor-pointer font-medium hover:bg-red-300 transition duration-300 ease-in-out font-light text-red-600 text-xs rounded-md">ABC</span>
-                                            
-                                        </div>
-                                        <div
-                                            class="border-t-0 px-6 md:w-1/6 align-middle text-center border-l-0 border-r-0 text-xs  p-4">
-                                            ABC
-                                        </div>
+                                                    <div
+                                                        class="border-t-0 md:w-1/6 px-6 align-middle border-l-0 border-r-0 text-xs  p-4">
+                                                                {/* {/* <ng-container>
+                                        <ng-template [ngSwitchCase]="'EASY'"> */}
+                                                            {item.point === 5 && <span
+                                                                class="px-2 py-1 bg-green-400 cursor-pointer font-medium hover:bg-green-300 transition duration-300 ease-in-out font-light text-green-600 text-xs rounded-md" style={{color: 'white'}}>
+                                                                    {item.point}</span>}
+                                                            {/* </ng-template>
+                                                            <ng-template [ngSwitchCase]="'MEDIUM'"> */}
+                                                            {item.point === 10 && <span
+                                                                class="px-2 py-1 bg-red-400 cursor-pointer font-medium hover:bg-green-300 transition duration-300 ease-in-out font-light text-green-600 text-xs rounded-md" style={{color: 'white'}}>
+                                                                    {item.point}</span>}
 
-                                        <td
-                                            class="border-t-0 px-6 align-middle text-right border-l-0 border-r-0 text-xs  p-4">
-                                            <div class="text-xl">ABC</div>
-                                        </td>
-
-                                        </div>
-                                    </div>
+                                                            {/* </ng-template>
+                                                            <ng-template [ngSwitchCase]="'HARD'"> */}
+                                                            {item.point === 15 && <span
+                                                                class="px-2 py-1 bg-gray-400 cursor-pointer font-medium hover:bg-green-300 transition duration-300 ease-in-out font-light text-green-600 text-xs rounded-md" style={{color: 'white'}}>
+                                                                    {item.point}</span>}
+                                                        
+                                                    </div>
+                                                    <div
+                                                        class="border-t-0 px-6 md:w-1/6 align-middle text-center border-l-0 border-r-0 text-xs  p-4">
+                                                        {item.questionType}
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
                                     </div>
 
 

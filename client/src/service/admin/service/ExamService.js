@@ -38,6 +38,17 @@ class ExamService {
         })
     }
 
+    async getExam(id){
+        const token = localStorage.getItem("jwtToken");
+        const AuthStr = 'Bearer ' + token;
+        return await axios.get("http://appquizz-env.eba-ymije3fm.us-east-1.elasticbeanstalk.com/api/exams/"+id,
+        {
+            headers : {
+                'Authorization': AuthStr 
+            }
+        })
+    }
+
 }
 
 export default new ExamService();

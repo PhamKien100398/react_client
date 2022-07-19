@@ -20,7 +20,7 @@ class ExamCardComponent extends React.Component{
                 <a>
                     <div class="relative img-hover-zoom">
                         <img alt="image of {{examUser?.exam.part.course.name}}" class="bg-img block h-56 w-full cursor-pointer"
-                            src="https://appwe.vn/upload/blogs/images/ngon-ngu-lap-trinh-android/c%2B%2B.jpg"/>
+                            src="https://pgdtxhoangmai.edu.vn/sach-giao-khoa-ngu-van-lop-7-tap-1/imager_7141.jpg"/>
                         {/* <i class="fa fa-circle absolute top-0 right-0 mt-4 mr-4"></i> */}
                         <FontAwesomeIcon icon = {faCircle} className = "absolute top-0 right-0 mt-4 mr-4"/>
                     </div>
